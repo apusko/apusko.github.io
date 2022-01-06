@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 
 .section {
-  padding: 7rem 0;
+  padding: 2rem 0;
 }
 
 .filters a {
@@ -303,13 +303,13 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-/* Custom Navmenu */
+/* Custom barmenu */
 .custom-navmenu {
   background: #0d1e2d;
 }
 .custom-navmenu .custom-menu, .custom-navmenu .custom-menu li {
   padding: 0;
-  margin: 0;
+  margin: 0px;
   list-style: none;
 }
 .custom-navmenu .custom-menu li {
@@ -347,8 +347,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 @media (max-width: 780px) {
   .custom-navbar > .container {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
 .custom-navbar .navbar-brand {
