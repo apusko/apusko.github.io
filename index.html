@@ -31,14 +31,14 @@
 
 <body>
 
-  <!-- ======= Navbar ======= -->
+  <!-- ======= Navbar ======= 
   <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
     <div class="container py-2 py-md-5">
       <div class="row align-items-start">
         <div class="col-md-2">
-          <ul class="custom-menu">
-             <!-- <li class="active"><a href="index.html"></a></li>
-            <li><a href="about.html">Обо мне</a></li> -->
+          <ul class="custom-menu"> 
+            <li class="active"><a href="index.html"></a></li>
+            <li><a href="about.html">Обо мне</a></li> 
             
             <li><a href="#Works">Портфолио</a></li>
             <li><a href="#Service">Услуги</a></li>
@@ -60,17 +60,30 @@
       </div>
 
     </div>
-  </div>
+  </div>-->
 
-  <nav class="navbar navbar-light custom-navbar section">
+  <nav class="navbar navbar-light custom-navbar <section></section>">
     <div class="container">
+
        <a class="navbar-brand" href="index.html">Пусько Александр <p class="navbar_extra">Оператор-постановщик  <br>Режиссер документального кино  </p></a>
       <!-- <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">   <div class="col-md-2 ">
           <h3>Сотрудничество</h3>
           <p>apusko.pro@yandex.ru <br> +79013902216<br> @apusko</p>
-        </div>-->
+        </div>
+<div class="navbar-brand" ><p class="navbar_extra"> apusko.pro@yandex.ru <br> +79013902216<br> @apusko </p></div>
+        -->
       </a>
-       <div class="navbar-brand" ><p class="navbar_extra"> apusko.pro@yandex.ru <br> +79013902216<br> @apusko </p></div>
+      <div class="row">
+      <div class="col-sm-6 social text-end">
+      <h4><br></h4>
+          <p class="navbar_extra">YouTube <br> +79013902216</p>
+        </div>
+      <div class="col-sm-2 social text-md-end">
+          <h4>Контакты</h4>
+          <p class="navbar_extra">apusko.pro@yandex.ru <br> +79013902216</p>
+        </div>
+      </div>
+       
 
       </a>
     </div>
@@ -89,22 +102,50 @@
           <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
             <div id="filters" class="filters">
               <a href="#" data-filter="*" class="active">All</a>
-              <a href="#" data-filter=".web">Реклама</a>
-              <a href="#" data-filter=".design">Документальные</a>
-              <a href="#" data-filter=".branding">Тревел</a>
+              <a href="#" data-filter=".commercial">Реклама</a>
+              <a href="#" data-filter=".documentary">Документальные</a>
+              <a href="#" data-filter=".travel">Тревел</a>
               <a href="#" data-filter=".photography">Короткий метр</a> 
 
             </div>
           </div>
         </div>
         <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200" >
-          <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
+          <div class="item commercial col-sm-6 col-md-4 col-lg-4 mb-4">
               <a  class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/y9q7jGvC5pQ">
                <div class="work-info">
                 <h3>БФУ. Здесь можно всё </h3>
                 <span>Commercial</span>
               </div>
               <img class="img-fluid" src="assets/img/Video/BFU.jpeg">
+            </a>
+          </div>
+          <div class="item commercial col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://vimeo.com/316679136" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>ЮНОСТЬ</h3>
+                <span>Commercial</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/Youth.jpeg">
+            </a>
+          </div>
+          
+          <div class="item documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/9L1Nj66ez08" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>KaliningrArt</h3>
+                <span>Documentary</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/KaliningrArt.jpeg">
+            </a>
+          </div>
+          <div class="item documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+           <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://vimeo.com/307625617" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>Портрет каскадера</h3>
+                <span>Documentary</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/StuntMan.jpeg">
             </a>
           </div>
           <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
@@ -116,40 +157,67 @@
               <img class="img-fluid" src="assets/img/Video/Dopros.jpeg">
             </a>
           </div>
-          <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
+          <div class="item travel documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/qXcG5fz3LlU " class="item-wrap fancybox">
               <div class="work-info">
-                <h3>Cocooil</h3>
-                <span>Branding</span>
+                <h3>Калининград. Молодежный путеводитель</h3>
+                <span>Travel</span>
               </div>
-              <img class="img-fluid" src="assets/img/img_3.jpg">
+              <img class="img-fluid" src="assets/img/Video/Kaliningrad.jpeg">
             </a>
           </div>
-          <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
+          <div class="item commercial col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/6NQNsUSHckk" class="item-wrap fancybox">
               <div class="work-info">
-                <h3>Nike Shoe</h3>
-                <span>Design</span>
+                <h3>Муратов</h3>
+                <span>Commercial</span>
               </div>
-              <img class="img-fluid" src="assets/img/img_4.jpg">
+              <img class="img-fluid" src="assets/img/Video/Muratov.jpeg">
             </a>
           </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
+          <div class="item travel documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/DwZwQ50MrkM" class="item-wrap fancybox">
               <div class="work-info">
-                <h3>Kitchen Sink</h3>
-                <span>Photography</span>
+                <h3>Кольский полуостров</h3>
+                <span>Documentary</span>
               </div>
-              <img class="img-fluid" src="assets/img/img_5.jpg">
+              <img class="img-fluid" src="assets/img/Video/Kolsky.jpeg">
             </a>
           </div>
-          <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
+          <div class="item commercial col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/yihr3jozYBg" class="item-wrap fancybox">
               <div class="work-info">
-                <h3>Amazon</h3>
-                <span>brandingn</span>
+                <h3>FootballTeam</h3>
+                <span>Commercial</span>
               </div>
-              <img class="img-fluid" src="assets/img/img_6.jpg">
+              <img class="img-fluid" src="assets/img/Video/FootballTeam.jpeg">
+            </a>
+          </div>
+          <div class="item travel documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://vimeo.com/345926076" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>Вокруг света за 537 дней</h3>
+                <span>Documentary</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/Smorodin.jpeg">
+            </a>
+          </div>
+          <div class="item documentary col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/j4nXKgj6IA4" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>Kaliningrad Street Food</h3>
+                <span>Documentary</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/KSF.jpeg">
+            </a>
+          </div>
+          <div class="item commercial col-sm-6 col-md-4 col-lg-4 mb-4">
+            <a class="my-video-links item-wrap fancybox" data-autoplay="true" data-vbtype="video" href="https://youtu.be/EQ_nKcivXkk" class="item-wrap fancybox">
+              <div class="work-info">
+                <h3>ФотоФутболки</h3>
+                <span>Commercial</span>
+              </div>
+              <img class="img-fluid" src="assets/img/Video/FotoFutbolki.jpeg">
             </a>
           </div>
         </div>
@@ -157,7 +225,7 @@
     </section><!-- End  Works Section -->
 
 
-    <!-- ======= Services Section ======= -->
+    <!-- ======= Services Section ======= 
     <section class="section services" id="Service">
       <div class="container">
         <div class="row justify-content-center text-center mb-4">
@@ -232,10 +300,9 @@
           <div class="credits"> Оператор-постановщик // Режиссер документального кино </div>
         </div>
         <div class="col-sm-6 social text-md-end">
-          <a href="#"><span class="bi bi-twitter"></span></a>
-          <a href="#"><span class="bi bi-facebook"></span></a>
-          <a href="#"><span class="bi bi-instagram"></span></a>
-          <a href="#"><span class="bi bi-linkedin"></span></a>
+           <a href="https://www.youtube.com/c/apusko"><span class="bi bi-youtube"></span></a>
+          <a href="https://www.instagram.com/apusko/"><span class="bi bi-instagram"></span></a>
+          <a href="https://www.t.me/Alexpusko"><span class="bi bi-telegram"></span></a>
         </div>
       </div>
     </div>
