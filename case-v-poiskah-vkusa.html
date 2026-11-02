@@ -1,0 +1,1810 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>В поисках вкуса — кейс Александра Пусько / APUSKO</title>
+  <meta
+    name="description"
+    content="Кейс В поисках вкуса: документально-гастрономический проект о локальной культуре, еде, регионах и людях."
+  />
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --ink: #070707;
+      --muted: #5e5e5e;
+      --accent: #4f9fc8;
+      --accent-soft: rgba(79, 159, 200, 0.12);
+      --line: rgba(0, 0, 0, 0.1);
+      --line-strong: rgba(0, 0, 0, 0.16);
+      --panel: rgba(255, 255, 255, 0.68);
+      --radius: 10px;
+      --radius-sm: 7px;
+      --max: 1260px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.32;
+      mix-blend-mode: multiply;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.045) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.035) 0 1px, transparent 1px);
+      background-size: 5px 5px, 7px 7px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p,
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    .page {
+      max-width: var(--max);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 54px) 46px;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0));
+    }
+
+    .topbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .identity {
+      display: grid;
+      gap: 4px;
+    }
+
+    .identity strong {
+      font-size: 17px;
+      line-height: 1.1;
+      font-weight: 820;
+    }
+
+    .identity span {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 2.7vw, 44px);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      border-color: var(--ink);
+    }
+
+    .crumbs {
+      padding: 22px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 760;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 52px 0 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-label {
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin-bottom: 22px;
+      font-size: clamp(52px, 8vw, 102px);
+      line-height: 0.9;
+      font-weight: 920;
+      letter-spacing: -0.062em;
+    }
+
+    .lead {
+      max-width: 1040px;
+      color: #151515;
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.48;
+      letter-spacing: -0.014em;
+    }
+
+    .showreel {
+      position: relative;
+      width: min(780px, 100%);
+      margin: 30px auto 0;
+      padding: 0;
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      appearance: none;
+      border-radius: var(--radius);
+      background: #111;
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .showreel img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+
+    .showreel:hover,
+    .showreel:focus-visible {
+      border-color: rgba(0, 0, 0, 0.42);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.16),
+        0 42px 90px rgba(0, 0, 0, 0.14);
+    }
+
+    .showreel:hover img,
+    .showreel:focus-visible img {
+      transform: scale(1.025);
+    }
+
+    .showreel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+    }
+
+    .showreel-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0);
+      color: #fff;
+      transform: translate(-50%, -50%);
+      transition:
+        background 180ms ease,
+        transform 180ms ease;
+    }
+
+    .showreel-play svg {
+      width: 28px;
+      height: 28px;
+      margin-left: 4px;
+      fill: currentColor;
+    }
+
+    .showreel:hover .showreel-play,
+    .showreel:focus-visible .showreel-play {
+      background: rgba(0, 0, 0, 0.56);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .section {
+      padding: 46px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.34fr) minmax(0, 1fr);
+      gap: clamp(28px, 6vw, 88px);
+      align-items: start;
+    }
+
+    .compact-section .section-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .project-overview .section-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .project-overview .section-title {
+      display: grid;
+      gap: 20px;
+    }
+
+    .project-overview .text-flow {
+      max-width: 940px;
+    }
+
+    .project-overview .showreel {
+      width: 100%;
+      margin: 0;
+    }
+
+    .film-feature .section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(26px, 4vw, 54px);
+      align-items: center;
+    }
+
+    .film-feature .text-flow {
+      max-width: 620px;
+    }
+
+    .film-feature .showreel {
+      width: 100%;
+      margin: 0;
+    }
+
+    .film-feature .showreel::after {
+      z-index: 2;
+      background: rgba(0, 0, 0, 0);
+      transition: background 180ms ease;
+    }
+
+    .film-feature .showreel:hover::after,
+    .film-feature .showreel:focus-visible::after {
+      background: rgba(0, 0, 0, 0.28);
+    }
+
+    .film-feature .episode-cover {
+      aspect-ratio: 16 / 9;
+    }
+
+    .film-feature .episode-cover::after {
+      background: transparent;
+    }
+
+    .film-feature .episode-play {
+      left: 50%;
+      right: auto;
+      top: 50%;
+      bottom: auto;
+      z-index: 3;
+      width: 54px;
+      height: 54px;
+      background: rgba(0, 0, 0, 0.34);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.94);
+      transition:
+        opacity 180ms ease,
+        background 180ms ease,
+        transform 180ms ease;
+    }
+
+    .film-feature .showreel:hover .episode-play,
+    .film-feature .showreel:focus-visible .episode-play {
+      background: rgba(0, 0, 0, 0.58);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .section-title h2 {
+      margin-top: 14px;
+      font-size: clamp(31px, 4.4vw, 56px);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .text-flow {
+      display: grid;
+      gap: 20px;
+      color: #202020;
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .reflection-block {
+      padding-top: 56px;
+      padding-bottom: 56px;
+    }
+
+    .reflection-card {
+      padding: clamp(24px, 4vw, 42px);
+      display: grid;
+      gap: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.04);
+    }
+
+    .reflection-card .section-kicker {
+      margin-bottom: 0;
+    }
+
+    .reflection-card .text-flow {
+      max-width: 980px;
+    }
+
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-stat {
+      min-width: 0;
+      min-height: 92px;
+      padding: 16px 14px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+    }
+
+    .project-stat + .project-stat {
+      border-left: 1px solid var(--line);
+    }
+
+    .project-stat strong {
+      color: var(--ink);
+      font-size: clamp(21px, 2vw, 28px);
+      line-height: 1;
+      font-weight: 830;
+      letter-spacing: -0.025em;
+    }
+
+    .project-stat span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .project-gallery {
+      width: 100%;
+      display: grid;
+      gap: 14px;
+    }
+
+    .gallery-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .gallery-controls {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .gallery-button {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      transition:
+        border-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .gallery-button:hover,
+    .gallery-button:focus-visible {
+      border-color: rgba(0, 0, 0, 0.28);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .gallery-track {
+      height: clamp(190px, 22vw, 260px);
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 0 clamp(12px, 2vw, 22px) 14px;
+      scroll-padding-inline: clamp(12px, 2vw, 22px);
+      scroll-snap-type: x proximity;
+      scrollbar-width: thin;
+    }
+
+    .gallery-card {
+      width: clamp(190px, 22vw, 260px);
+      height: 100%;
+      padding: 18px;
+      flex: 0 0 auto;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.12)),
+        linear-gradient(120deg, #242424, #777 48%, #d9d9d9);
+      appearance: none;
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .gallery-card:hover,
+    .gallery-card:focus-visible {
+      border-color: rgba(0, 0, 0, 0.34);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.11);
+      transform: translateY(-2px);
+    }
+
+    .gallery-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.08));
+      pointer-events: none;
+    }
+
+    .gallery-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 320ms ease;
+    }
+
+    .gallery-card:hover img,
+    .gallery-card:focus-visible img {
+      transform: scale(1.025);
+    }
+
+    .gallery-card span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .case-action {
+      width: fit-content;
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 820;
+      transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .case-action:hover,
+    .case-action:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 14px 32px rgba(79, 159, 200, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .episodes-section .section-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .episodes-section .section-title {
+      max-width: 760px;
+    }
+
+    .episode-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .episode-card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      line-height: 1.18;
+      font-weight: 870;
+      letter-spacing: -0.02em;
+    }
+
+    .episode-card p {
+      color: #292929;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-link {
+      min-height: 72px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.58);
+      color: #1f1f1f;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 800;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .source-link:hover,
+    .source-link:focus-visible {
+      border-color: rgba(0, 0, 0, 0.28);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .source-link span {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .episode-card {
+      overflow: hidden;
+      transition:
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+    }
+
+    .episode-trigger {
+      width: 100%;
+      padding: 0;
+      display: block;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .episode-cover {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.38)),
+        url("assets/pravo-kazhdogo.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .episode-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+    }
+
+    .episode-cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+
+    .episode-cover.vk-cover {
+      min-height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.18)),
+        linear-gradient(120deg, #2b241b, #75644c 48%, #151210);
+    }
+
+    .episode-cover.vk-cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.2), transparent 22%),
+        radial-gradient(circle at 82% 70%, rgba(79, 159, 200, 0.24), transparent 26%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .cover-label {
+      position: relative;
+      z-index: 1;
+      max-width: 72%;
+      color: #fff;
+      font-size: 24px;
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      text-shadow: 0 10px 26px rgba(0, 0, 0, 0.58);
+    }
+
+    .episode-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0);
+      color: #fff;
+      transform: translate(-50%, -50%);
+      transition:
+        background 180ms ease,
+        transform 180ms ease;
+    }
+
+    .episode-play svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+      fill: currentColor;
+    }
+
+    .episode-card:hover .episode-cover img,
+    .episode-trigger:focus-visible .episode-cover img {
+      transform: scale(1.035);
+    }
+
+    .episode-card:hover .episode-play,
+    .episode-trigger:focus-visible .episode-play {
+      background: rgba(0, 0, 0, 0.52);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .episode-copy {
+      min-height: 156px;
+      padding: 17px 18px 20px;
+      display: grid;
+      align-content: start;
+    }
+
+    .video-modal,
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 54px);
+    }
+
+    .video-modal[hidden],
+    .image-modal[hidden] {
+      display: none;
+    }
+
+    .video-backdrop {
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .video-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(1080px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: #080808;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
+    }
+
+    .video-modal iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: 0;
+    }
+
+    .image-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100vw - 36px));
+      max-height: calc(100vh - 36px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: #080808;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
+    }
+
+    .image-dialog.vertical {
+      width: min(520px, calc(100vw - 36px));
+    }
+
+    .image-dialog.square {
+      width: min(720px, calc(100vw - 36px));
+    }
+
+    .image-preview {
+      width: 100%;
+      background: #fff;
+    }
+
+    .image-preview img {
+      width: 100%;
+      max-height: calc(100vh - 36px);
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .image-preview span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .image-nav-button {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.48);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .image-nav-button:hover,
+    .image-nav-button:focus-visible {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(0, 0, 0, 0.68);
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    .image-nav-button.prev {
+      left: clamp(16px, 4vw, 54px);
+    }
+
+    .image-nav-button.next {
+      right: clamp(16px, 4vw, 54px);
+    }
+
+    .video-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.68);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .process {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .process-heading {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .role-line {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.08;
+      font-weight: 880;
+      letter-spacing: -0.04em;
+    }
+
+    .role-line span {
+      color: var(--muted);
+      font-weight: 780;
+    }
+
+    .process-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+      gap: clamp(20px, 5vw, 70px);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-row strong {
+      color: var(--accent);
+      font-size: 36px;
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -0.055em;
+    }
+
+    .process-row h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+      line-height: 1.12;
+      font-weight: 880;
+      letter-spacing: -0.025em;
+    }
+
+    .process-row p {
+      max-width: 780px;
+      color: #222;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .case-footer {
+      padding: 48px 0 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+      align-items: start;
+      gap: clamp(28px, 5vw, 70px);
+    }
+
+    .footer-copy h2 {
+      max-width: 520px;
+      margin-bottom: 14px;
+      font-size: 29px;
+      line-height: 1.05;
+      font-weight: 870;
+      letter-spacing: -0.04em;
+    }
+
+    .footer-copy p {
+      max-width: 560px;
+      margin-bottom: 22px;
+      color: #202020;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer-about-link {
+      min-height: 44px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 820;
+    }
+
+    .footer-panel {
+      justify-self: end;
+      max-width: 560px;
+      width: 100%;
+      display: grid;
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, var(--accent-soft), transparent 42%),
+        rgba(255, 255, 255, 0.58);
+    }
+
+    .footer-kicker {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      font-style: normal;
+      min-width: 0;
+    }
+
+    .footer-link {
+      min-width: 0;
+      min-height: 46px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #222;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 760;
+      white-space: normal;
+      overflow: hidden;
+    }
+
+    .footer-link.wide {
+      grid-column: 1 / -1;
+    }
+
+    .footer-link span:last-child {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: var(--ink);
+    }
+
+    .icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.7;
+    }
+
+    .footer-strip {
+      grid-column: 1 / -1;
+      min-height: 70px;
+      padding: 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 4px;
+    }
+
+    .footer-brand strong {
+      font-size: 15px;
+      line-height: 1.1;
+      font-weight: 860;
+    }
+
+    .footer-brand span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 3vw, 42px);
+      color: #1f1f1f;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+
+    .footer-nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-nav a:hover {
+      border-color: var(--ink);
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        padding: 18px 0 14px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+        font-size: 12px;
+      }
+
+      .hero,
+      .section-grid,
+      .case-footer {
+        grid-template-columns: 1fr;
+      }
+
+      .project-overview .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-panel {
+        justify-self: start;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .episode-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-strip {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        border: 0;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .episode-list {
+        grid-template-columns: 1fr;
+      }
+
+      .project-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .project-stat + .project-stat {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .process-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="identity" href="index.html" aria-label="На главную">
+        <strong>Александр Пусько</strong>
+        <span>Режиссер монтажа</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="index.html#cases">Кейсы</a>
+        <a href="index.html#projects">Проекты и продукты</a>
+          <a href="index.html#profile">Обо мне</a>
+        <a href="index.html#contact">Контакты</a>
+      </nav>
+    </header>
+
+    <div class="crumbs"><a href="index.html#cases">Кейсы</a> / В поисках вкуса</div>
+
+    <section class="hero">
+      <article>
+        <p class="case-label">Документально-гастрономический проект</p>
+        <h1>В поисках вкуса</h1>
+        <p class="lead">
+          Проект о локальной культуре, еде, регионах и людях,
+          через которых раскрывается характер места.
+        </p>
+      </article>
+    </section>
+
+    <section class="section compact-section project-overview">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">О проекте</p>
+          <div class="text-flow">
+            <p>
+              “В поисках вкуса” — документально-гастрономический проект команды
+              “Уличная еда России” о локальной культуре, еде и людях. Проект исследует
+              регионы через продукты, традиции, фермеров, шефов, ремесленников и героев,
+              которые сохраняют и переосмысляют региональные вкусы.
+            </p>
+            <p>
+              Каждый выпуск работает как небольшое документальное путешествие: через еду
+              в нем раскрывается характер места, людей и локальной идентичности. На данный
+              момент проект состоит из 10 документально-гастрономических фильмов о российских
+              регионах, культуре и людях, которые развивают вкус своей территории.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section episodes-section">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">Выпуски</p>
+        </div>
+        <div class="episode-list">
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239203&hd=2"
+              data-video-title="Калининградская область"
+            >
+              <div class="episode-cover">
+                <img
+                  src="assets/v-poiskah-vkusa-kaliningrad-cover.png"
+                  alt="Приготовление строганины из пеламиды в Калининградской области"
+                />
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Калининградская область</h3>
+                <p>История строганины из пеламиды — блюда, которое прошло путь от домашней кухни до ресторанного хита и стало гастрономическим символом региона.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239190&hd=2"
+              data-video-title="Мурманская область"
+            >
+              <div class="episode-cover">
+                <img
+                  src="assets/v-poiskah-vkusa-murmansk-cover.png"
+                  alt="Знакомство с кухней и традициями Мурманской области"
+                />
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Мурманская область</h3>
+                <p>Путешествие по Мурманской области, где северные продукты, местные жители и традиции разных регионов складываются в новый вкус Заполярья.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239191&hd=2"
+              data-video-title="Иван-чай"
+            >
+              <div class="episode-cover">
+                <img
+                  src="assets/v-poiskah-vkusa-ivan-chai-cover.png"
+                  alt="Исследование истории и свойств иван-чая"
+                />
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Иван-чай</h3>
+                <p>Исследование иван-чая: от сбора кипрея на Кольском полуострове и в Копорье до научных архивов и подтверждённых полезных свойств.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239119&hd=2"
+              data-video-title="Тверская область"
+            >
+              <div class="episode-cover">
+                <img
+                  src="assets/v-poiskah-vkusa-tver-cover.png"
+                  alt="Знакомство с рыбными традициями Удомли в Тверской области"
+                />
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Тверская область</h3>
+                <p>Поездка в Удомлю за рыбными традициями Тверской области: рыбник, серые щи из крошева и современный фиш-дог с сельдью.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239034&hd=2"
+              data-video-title="Курская область"
+            >
+              <div class="episode-cover">
+                <img
+                  src="assets/v-poiskah-vkusa-kursk-cover.png"
+                  alt="Знакомство с фермерами и кухней Курской области"
+                />
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Курская область</h3>
+                <p>Поездка в Курск за локальными вкусами: картофельной друнькой, запечённым бараньим боком и современным прочтением традиционных блюд.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239035&hd=2"
+              data-video-title="Ростовская область"
+            >
+              <div class="episode-cover">
+                <img src="assets/v-poiskah-vkusa-rostov-cover.png" alt="Знакомство с кухней Ростовской области" loading="lazy">
+                <span class="episode-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="episode-copy">
+                <h3>Ростовская область</h3>
+                <p>Поездка в Ростов-на-Дону за вкусом донских пышек и цимлянского леща — блюдами, через которые раскрывается гастрономическая культура региона.</p>
+              </div>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact-section project-overview film-feature">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">Отдельный фильм</p>
+          <div class="text-flow">
+            <p>
+              В рамках проекта я также работал над документальным фильмом об “Уличной еде России”:
+              истории о том, как региональная инициатива выросла в заметную организацию,
+              связанную с уличной едой, фестивалями, локальной культурой и людьми,
+              которые развивают гастрономическую среду в регионах.
+            </p>
+            <p>
+              Этот фильм стоит отдельно от серий “В поисках вкуса”: здесь фокус смещается
+              с конкретного региона на путь самой команды, её развитие, внутреннюю энергию
+              и масштаб движения вокруг уличной еды.
+            </p>
+          </div>
+        </div>
+
+        <button
+          class="showreel video-open"
+          type="button"
+          data-video-url="https://vk.com/video_ext.php?oid=-211838964&id=456239082&hd=2"
+          data-video-title="Фильм об Уличной еде России"
+          aria-label="Смотреть фильм об Уличной еде России"
+        >
+          <div class="episode-cover">
+            <img
+              src="assets/street-food-russia-film-cover.png"
+              alt="Kaliningrad Street Food — история о людях, эмоциях и вкусной еде"
+            />
+            <span class="episode-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section class="section compact-section reflection-block">
+      <div class="section-grid">
+        <div class="section-title reflection-card">
+          <p class="section-kicker">Что для меня важно в этом проекте</p>
+          <div class="text-flow">
+            <p>
+              “В поисках вкуса” для меня — это опыт работы на стыке документального кино,
+              travel-формата, гастрономии и культурного исследования. Здесь важно было
+              не просто красиво показать еду, а через нее раскрыть место, людей,
+              локальную идентичность и характер региона.
+            </p>
+            <p>
+              В проекте я работал с форматом, режиссурой, съемкой и монтажом: помогал
+              искать структуру выпусков, выстраивать логику истории, работать с героями
+              и собирать материал так, чтобы еда становилась не просто темой,
+              а способом рассказать о территории.
+            </p>
+            <p>
+              Этот кейс важен для меня еще и потому, что он показал, как документальный
+              подход может работать внутри гастрономического и travel-контента: через
+              наблюдение, фактуру, людей, атмосферу и внимательное отношение к месту.
+            </p>
+          </div>
+          <div class="project-stats" aria-label="Масштаб проекта В поисках вкуса">
+            <div class="project-stat">
+              <strong>10 фильмов</strong>
+              <span>документально-гастрономический цикл</span>
+            </div>
+            <div class="project-stat">
+              <strong>9 регионов</strong>
+              <span>география проекта</span>
+            </div>
+            <div class="project-stat">
+              <strong>≈50 часов</strong>
+              <span>исходного материала</span>
+            </div>
+          </div>
+          <div class="project-gallery" aria-label="Галерея съемочных экспедиций">
+            <div class="gallery-head">
+              <span>Экспедиции и съемки</span>
+              <div class="gallery-controls" aria-label="Пролистывание галереи">
+                <button class="gallery-button" type="button" data-gallery-prev aria-label="Назад">‹</button>
+                <button class="gallery-button" type="button" data-gallery-next aria-label="Вперед">›</button>
+              </div>
+            </div>
+            <div class="gallery-track">
+              <button class="gallery-card" type="button" data-image-open data-image-src="assets/v-poiskah-vkusa-gallery-team.jpg" aria-label="Открыть фотографию команды проекта"><img src="assets/v-poiskah-vkusa-gallery-team.jpg" alt="Команда проекта В поисках вкуса" loading="lazy"><span>Команда проекта</span></button>
+              <button class="gallery-card" type="button" data-image-open data-image-src="assets/v-poiskah-vkusa-gallery-food.jpg" aria-label="Открыть фотографию локальной кухни"><img src="assets/v-poiskah-vkusa-gallery-food.jpg" alt="Локальная кухня во время съемок" loading="lazy"><span>Локальная кухня</span></button>
+              <button class="gallery-card" type="button" data-image-open data-image-src="assets/v-poiskah-vkusa-gallery-filming.jpg" aria-label="Открыть фотографию съемочного процесса"><img src="assets/v-poiskah-vkusa-gallery-filming.jpg" alt="Съемочный процесс в экспедиции" loading="lazy"><span>Съемочный процесс</span></button>
+              <button class="gallery-card" type="button" data-image-open data-image-src="assets/v-poiskah-vkusa-gallery-region.jpg" aria-label="Открыть фотографии из региона"><img src="assets/v-poiskah-vkusa-gallery-region.jpg" alt="Герои и места съемочной экспедиции" loading="lazy"><span>Работа в регионе</span></button>
+              <button class="gallery-card" type="button" data-image-open data-image-src="assets/v-poiskah-vkusa-gallery-expedition.jpg" aria-label="Открыть фотографию съемочной группы"><img src="assets/v-poiskah-vkusa-gallery-expedition.jpg" alt="Съемочная группа в экспедиции" loading="lazy"><span>Съемочная группа</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="case-footer" id="contact">
+      <article class="footer-copy">
+        <h2>Больше обо мне и проектах</h2>
+        <p>
+          В соцсетях делюсь кейсами, наблюдениями о монтаже, авторскими проектами
+          и материалами к будущим образовательным запускам.
+        </p>
+        <a class="footer-about-link" href="mailto:apusko.media@gmail.com">Написать →</a>
+      </article>
+
+      <div class="footer-panel">
+        <div>
+          <p class="footer-kicker">Связь и соцсети</p>
+          <address class="footer-links">
+            <a class="footer-link wide" href="mailto:apusko.media@gmail.com">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+              </span>
+              <span>apusko.media@gmail.com</span>
+            </a>
+            <a class="footer-link" href="https://www.instagram.com/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><path d="M17.5 6.5h.01"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://t.me/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m21 3-7.5 18-4-7-6.5-3 18-8Z"/><path d="m9.5 14 4-4"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://www.youtube.com/@apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 10 5 2-5 2v-4Z"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://vk.ru/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">VK</span>
+              <span>@apusko</span>
+            </a>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="footer-strip">
+        <a class="footer-brand" href="index.html" aria-label="На главную">
+          <strong>Александр Пусько</strong>
+          <span>Режиссер монтажа</span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Карта сайта">
+          <a href="index.html#cases">Кейсы</a>
+          <a href="index.html#projects">Проекты и продукты</a>
+          <a href="index.html#profile">Обо мне</a>
+          <a href="index.html#contact">Контакты</a>
+        </nav>
+      </div>
+    </footer>
+  </main>
+
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Просмотр видео" hidden>
+    <button class="video-backdrop" type="button" data-video-close aria-label="Закрыть видео"></button>
+    <div class="video-dialog">
+      <button class="video-close" type="button" data-video-close aria-label="Закрыть видео">×</button>
+      <div id="videoFrame"></div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" hidden>
+    <button class="video-backdrop" type="button" data-image-close aria-label="Закрыть фотографию"></button>
+    <button class="image-nav-button prev" type="button" data-image-prev aria-label="Предыдущее фото">‹</button>
+    <button class="image-nav-button next" type="button" data-image-next aria-label="Следующее фото">›</button>
+    <div class="image-dialog">
+      <button class="video-close" type="button" data-image-close aria-label="Закрыть фотографию">×</button>
+      <div class="image-preview" id="imagePreview"><img src="" alt=""><span></span></div>
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "В поисках вкуса",
+      "genre": "Документально-гастрономический проект",
+      "description": "Проект команды Уличная еда России о локальной культуре, еде, регионах и людях.",
+      "creator": {
+        "@type": "Person",
+        "name": "Александр Пусько",
+        "alternateName": "APUSKO",
+        "jobTitle": "Режиссер / режиссер монтажа / оператор"
+      }
+    }
+  </script>
+
+  <script>
+    (() => {
+      const modal = document.querySelector("#videoModal");
+      const frameMount = document.querySelector("#videoFrame");
+      const openButtons = document.querySelectorAll(".video-open");
+      const closeButtons = document.querySelectorAll("[data-video-close]");
+      let lastFocused = null;
+
+      const makeEmbedUrl = (videoId) => {
+        const params = new URLSearchParams({
+          autoplay: "1",
+          rel: "0",
+          modestbranding: "1",
+          playsinline: "1"
+        });
+
+        return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+      };
+
+      const closeVideo = () => {
+        modal.hidden = true;
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        frameMount.replaceChildren();
+
+        if (lastFocused) {
+          lastFocused.focus();
+        }
+      };
+
+      const openVideo = (button) => {
+        const videoId = button.dataset.videoId;
+        const videoUrl = button.dataset.videoUrl;
+
+        if (!videoId && !videoUrl) {
+          return;
+        }
+
+        lastFocused = button;
+        const iframe = document.createElement("iframe");
+        iframe.src = videoUrl || makeEmbedUrl(videoId);
+        iframe.title = button.dataset.videoTitle || "Видео проекта";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allowFullscreen = true;
+
+        frameMount.replaceChildren(iframe);
+        modal.hidden = false;
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        modal.querySelector(".video-close").focus();
+      };
+
+      openButtons.forEach((button) => {
+        button.addEventListener("click", () => openVideo(button));
+      });
+
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", closeVideo);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !modal.hidden) {
+          closeVideo();
+        }
+      });
+    })();
+
+    (() => {
+      const gallery = document.querySelector(".gallery-track");
+      const prevButton = document.querySelector("[data-gallery-prev]");
+      const nextButton = document.querySelector("[data-gallery-next]");
+
+      if (!gallery || !prevButton || !nextButton) {
+        return;
+      }
+
+      const scrollGallery = (direction) => {
+        gallery.scrollBy({
+          left: direction * Math.round(gallery.clientWidth * 0.82),
+          behavior: "smooth"
+        });
+      };
+
+      prevButton.addEventListener("click", () => scrollGallery(-1));
+      nextButton.addEventListener("click", () => scrollGallery(1));
+    })();
+
+    (() => {
+      const modal = document.querySelector("#imageModal");
+      const dialog = modal?.querySelector(".image-dialog");
+      const preview = document.querySelector("#imagePreview");
+      const image = preview?.querySelector("img");
+      const label = preview?.querySelector("span");
+      const openButtons = Array.from(document.querySelectorAll("[data-image-open]"));
+      const closeButtons = document.querySelectorAll("[data-image-close]");
+      const prevButton = document.querySelector("[data-image-prev]");
+      const nextButton = document.querySelector("[data-image-next]");
+      let lastFocused = null;
+      let currentIndex = 0;
+
+      if (!modal || !dialog || !preview || !image || !label || !openButtons.length) {
+        return;
+      }
+
+      const renderImage = (button) => {
+        const title = button.querySelector("img")?.alt || "Фото проекта";
+        dialog.className = "image-dialog";
+        preview.className = "image-preview";
+        image.src = button.dataset.imageSrc || "";
+        image.alt = title;
+        label.textContent = title;
+      };
+
+      const showImage = (direction) => {
+        currentIndex = (currentIndex + direction + openButtons.length) % openButtons.length;
+        renderImage(openButtons[currentIndex]);
+      };
+
+      const openImage = (button, index) => {
+        lastFocused = button;
+        currentIndex = index;
+        renderImage(button);
+        modal.hidden = false;
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        nextButton?.focus();
+      };
+
+      const closeImage = () => {
+        modal.hidden = true;
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        dialog.className = "image-dialog";
+        preview.className = "image-preview";
+        image.src = "";
+        image.alt = "";
+        label.textContent = "";
+
+        if (lastFocused) {
+          lastFocused.focus();
+        }
+      };
+
+      openButtons.forEach((button, index) => {
+        button.addEventListener("click", () => openImage(button, index));
+      });
+
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", closeImage);
+      });
+
+      prevButton?.addEventListener("click", () => showImage(-1));
+      nextButton?.addEventListener("click", () => showImage(1));
+
+      document.addEventListener("keydown", (event) => {
+        if (modal.hidden) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          closeImage();
+        }
+
+        if (event.key === "ArrowLeft") {
+          showImage(-1);
+        }
+
+        if (event.key === "ArrowRight") {
+          showImage(1);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

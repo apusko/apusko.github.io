@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Право каждого — кейс Александра Пусько / APUSKO</title>
+  <meta
+    name="description"
+    content="Кейс Право каждого: авторский документальный веб-сериал о социальных инициативах Калининграда, героях проекта, выпусках и работе с документальной историей."
+  />
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --ink: #070707;
+      --muted: #5e5e5e;
+      --accent: #4f9fc8;
+      --accent-soft: rgba(79, 159, 200, 0.12);
+      --line: rgba(0, 0, 0, 0.1);
+      --line-strong: rgba(0, 0, 0, 0.16);
+      --panel: rgba(255, 255, 255, 0.68);
+      --radius: 10px;
+      --radius-sm: 7px;
+      --max: 1260px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.32;
+      mix-blend-mode: multiply;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.045) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.035) 0 1px, transparent 1px);
+      background-size: 5px 5px, 7px 7px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p,
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    .page {
+      max-width: var(--max);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 54px) 46px;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0));
+    }
+
+    .topbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .identity {
+      display: grid;
+      gap: 4px;
+    }
+
+    .identity strong {
+      font-size: 17px;
+      line-height: 1.1;
+      font-weight: 820;
+    }
+
+    .identity span {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 2.7vw, 44px);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      border-color: var(--ink);
+    }
+
+    .crumbs {
+      padding: 22px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 760;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 52px 0 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-label {
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.08;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin-bottom: 22px;
+      font-size: clamp(52px, 8vw, 102px);
+      line-height: 0.9;
+      font-weight: 920;
+      letter-spacing: -0.062em;
+    }
+
+    .lead {
+      max-width: 1040px;
+      color: #151515;
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.48;
+      letter-spacing: -0.014em;
+    }
+
+    .showreel {
+      position: relative;
+      width: min(780px, 100%);
+      margin: 30px auto 0;
+      padding: 0;
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      appearance: none;
+      border-radius: var(--radius);
+      background: #111;
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .showreel img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+
+    .showreel:hover,
+    .showreel:focus-visible {
+      border-color: rgba(0, 0, 0, 0.42);
+      box-shadow:
+        0 22px 38px rgba(0, 0, 0, 0.16),
+        0 42px 90px rgba(0, 0, 0, 0.14);
+    }
+
+    .showreel:hover img,
+    .showreel:focus-visible img {
+      transform: scale(1.025);
+    }
+
+    .showreel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+    }
+
+    .showreel-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0);
+      color: #fff;
+      transform: translate(-50%, -50%);
+      transition:
+        background 180ms ease,
+        transform 180ms ease;
+    }
+
+    .showreel-play svg {
+      width: 28px;
+      height: 28px;
+      margin-left: 4px;
+      fill: currentColor;
+    }
+
+    .showreel:hover .showreel-play,
+    .showreel:focus-visible .showreel-play {
+      background: rgba(0, 0, 0, 0.56);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .section {
+      padding: 46px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.34fr) minmax(0, 1fr);
+      gap: clamp(28px, 6vw, 88px);
+      align-items: start;
+    }
+
+    .compact-section .section-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .project-overview .section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(26px, 4vw, 54px);
+      align-items: center;
+    }
+
+    .project-overview .section-title {
+      display: grid;
+      gap: 20px;
+    }
+
+    .project-overview .text-flow {
+      max-width: 620px;
+    }
+
+    .project-overview .showreel {
+      width: 100%;
+      margin: 0;
+    }
+
+    .full-width-note .section-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .full-width-note .text-flow {
+      max-width: 100%;
+    }
+
+    .callout-section {
+      padding-top: 56px;
+      padding-bottom: 56px;
+    }
+
+    .case-callout {
+      padding: clamp(24px, 4vw, 42px);
+      display: grid;
+      gap: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.04);
+    }
+
+    .case-callout .section-kicker {
+      margin-bottom: 0;
+    }
+
+    .case-callout .text-flow {
+      max-width: 980px;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .production-stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .production-stat {
+      min-width: 0;
+      min-height: 92px;
+      padding: 16px 14px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+    }
+
+    .production-stat + .production-stat {
+      border-left: 1px solid var(--line);
+    }
+
+    .production-stat strong {
+      color: var(--ink);
+      font-size: clamp(21px, 2vw, 28px);
+      line-height: 1;
+      font-weight: 830;
+      letter-spacing: -0.025em;
+    }
+
+    .production-stat span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .section-title h2 {
+      margin-top: 14px;
+      font-size: clamp(31px, 4.4vw, 56px);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .text-flow {
+      display: grid;
+      gap: 20px;
+      color: #202020;
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .episodes-section .section-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .episodes-section .section-title {
+      max-width: 760px;
+    }
+
+    .episode-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .episode-card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      line-height: 1.18;
+      font-weight: 870;
+      letter-spacing: -0.02em;
+    }
+
+    .episode-card p {
+      color: #292929;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-link {
+      min-height: 86px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.58);
+      color: #1f1f1f;
+      font-size: clamp(16px, 1.45vw, 19px);
+      line-height: 1.35;
+      font-weight: 800;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .source-link:hover,
+    .source-link:focus-visible {
+      border-color: rgba(0, 0, 0, 0.28);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .source-link span {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .episode-card {
+      overflow: hidden;
+      transition:
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+    }
+
+    .episode-trigger {
+      width: 100%;
+      padding: 0;
+      display: block;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .episode-cover {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.38)),
+        url("assets/pravo-kazhdogo.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .episode-cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+
+    .episode-card:hover .episode-cover img,
+    .episode-trigger:focus-visible .episode-cover img {
+      transform: scale(1.035);
+    }
+
+    .episode-copy {
+      min-height: 156px;
+      padding: 17px 18px 20px;
+      display: grid;
+      align-content: start;
+    }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 54px);
+    }
+
+    .video-modal[hidden] {
+      display: none;
+    }
+
+    .video-backdrop {
+      position: absolute;
+      inset: 0;
+      padding: 0;
+      border: 0;
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .video-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(1080px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: #080808;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
+    }
+
+    .video-modal iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: 0;
+    }
+
+    .video-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.68);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .process {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .process-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+      gap: clamp(20px, 5vw, 70px);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-row strong {
+      color: var(--accent);
+      font-size: 36px;
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -0.055em;
+    }
+
+    .process-row h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+      line-height: 1.12;
+      font-weight: 880;
+      letter-spacing: -0.025em;
+    }
+
+    .process-row p {
+      max-width: 780px;
+      color: #222;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .case-footer {
+      padding: 48px 0 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+      align-items: start;
+      gap: clamp(28px, 5vw, 70px);
+    }
+
+    .footer-copy h2 {
+      max-width: 520px;
+      margin-bottom: 14px;
+      font-size: 29px;
+      line-height: 1.05;
+      font-weight: 870;
+      letter-spacing: -0.04em;
+    }
+
+    .footer-copy p {
+      max-width: 560px;
+      margin-bottom: 22px;
+      color: #202020;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer-about-link {
+      min-height: 44px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 820;
+    }
+
+    .footer-panel {
+      justify-self: end;
+      max-width: 560px;
+      width: 100%;
+      display: grid;
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, var(--accent-soft), transparent 42%),
+        rgba(255, 255, 255, 0.58);
+    }
+
+    .footer-kicker {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      font-style: normal;
+      min-width: 0;
+    }
+
+    .footer-link {
+      min-width: 0;
+      min-height: 46px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #222;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 760;
+      white-space: normal;
+      overflow: hidden;
+    }
+
+    .footer-link.wide {
+      grid-column: 1 / -1;
+    }
+
+    .footer-link span:last-child {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: var(--ink);
+    }
+
+    .icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.7;
+    }
+
+    .footer-strip {
+      grid-column: 1 / -1;
+      min-height: 70px;
+      padding: 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 4px;
+    }
+
+    .footer-brand strong {
+      font-size: 15px;
+      line-height: 1.1;
+      font-weight: 860;
+    }
+
+    .footer-brand span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 3vw, 42px);
+      color: #1f1f1f;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+
+    .footer-nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-nav a:hover {
+      border-color: var(--ink);
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        padding: 18px 0 14px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+        font-size: 12px;
+      }
+
+      .hero,
+      .section-grid,
+      .case-footer {
+        grid-template-columns: 1fr;
+      }
+
+      .project-overview .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-panel {
+        justify-self: start;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .episode-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .production-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .production-stat:nth-child(3) {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .production-stat:nth-child(4) {
+        border-top: 1px solid var(--line);
+      }
+
+      .production-stat:nth-child(5) {
+        grid-column: 1 / -1;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .footer-strip {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        border: 0;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .episode-list {
+        grid-template-columns: 1fr;
+      }
+
+      .process-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="identity" href="index.html" aria-label="На главную">
+        <strong>Александр Пусько</strong>
+        <span>Режиссер монтажа</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="index.html#cases">Кейсы</a>
+        <a href="index.html#projects">Проекты и продукты</a>
+          <a href="index.html#profile">Обо мне</a>
+        <a href="index.html#contact">Контакты</a>
+      </nav>
+    </header>
+
+    <div class="crumbs"><a href="index.html#cases">Кейсы</a> / Право каждого</div>
+
+    <section class="hero">
+      <article>
+        <p class="case-label">документальный веб-сериал</p>
+        <h1>Право каждого</h1>
+        <p class="lead">
+          Авторский документальный веб-сериал о людях из Калининграда,
+          которые своими силами запускают социальные инициативы и меняют среду вокруг себя.
+        </p>
+      </article>
+    </section>
+
+    <section class="section compact-section project-overview">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">О проекте</p>
+          <div class="text-flow">
+            <p>
+              “Право каждого” задуман как документальный веб-сериал о социальных инициативах
+              Калининграда. В центре проекта не абстрактная тема, а конкретные люди:
+              те, кто берет ответственность за небольшие, но важные изменения вокруг себя.
+            </p>
+            <p>
+              Для такого проекта важно не просто зафиксировать хорошую инициативу.
+              Нужно найти человека, его мотивацию, контекст, конфликт и внутреннюю линию,
+              чтобы серия воспринималась как история, а не как отчет о полезном деле.
+            </p>
+          </div>
+        </div>
+
+        <button
+          class="showreel video-open"
+          type="button"
+          data-video-id="QcNY2-CEg74"
+          data-video-title="Право каждого — основной ролик"
+          aria-label="Смотреть основной ролик проекта Право каждого"
+        >
+          <img
+            src="https://img.youtube.com/vi/QcNY2-CEg74/maxresdefault.jpg"
+            alt="Обложка основного ролика Право каждого"
+          />
+          <span class="showreel-play" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section episodes-section">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">Серии</p>
+        </div>
+        <div class="episode-list">
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="624-PQGOVso"
+              data-video-title="Право каждого — Хранители руин"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/624-PQGOVso/maxresdefault.jpg"
+                  alt="Обложка выпуска Хранители руин"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Хранители руин</h3>
+                <p>История о людях, которые сохраняют культурное наследие Калининградской области: приводят в порядок руины и возвращают забытым местам новую жизнь.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="a-tixR9qKV0"
+              data-video-title="Право каждого — Приют Славянское"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/a-tixR9qKV0/maxresdefault.jpg"
+                  alt="Обложка выпуска Приют Славянское"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Приют “Славянское”</h3>
+                <p>Выпуск о проблеме бездомных животных и людях, которые каждый день берут на себя заботу, ответственность и тяжелую невидимую работу.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="9FiiwdR5450"
+              data-video-title="Право каждого — Observer"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/9FiiwdR5450/maxresdefault.jpg"
+                  alt="Обложка выпуска Observer"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Observer</h3>
+                <p>История о социальном бизнесе: как проект может быть не только делом, но и способом менять среду, людей и отношение к ответственности.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="dYfEIhDw230"
+              data-video-title="Право каждого — Историческое наследие"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/dYfEIhDw230/maxresdefault.jpg"
+                  alt="Обложка выпуска Историческое наследие"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Историческое наследие</h3>
+                <p>Выпуск о сохранении и популяризации исторической памяти: как культурные объекты становятся поводом для действия и общего разговора о городе.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="8OmVDQBS4GE"
+              data-video-title="Право каждого — Kaliningrart"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/8OmVDQBS4GE/maxresdefault.jpg"
+                  alt="Обложка выпуска Kaliningrart"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Kaliningrart</h3>
+                <p>История про уличное искусство в Калининграде: визуальную среду, авторов, городские стены и право искусства быть частью повседневности.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="yM1SoK0Rrvk"
+              data-video-title="Право каждого — Аппарель"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/yM1SoK0Rrvk/maxresdefault.jpg"
+                  alt="Обложка выпуска Аппарель"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Аппарель</h3>
+                <p>Выпуск о жизни слепого человека в России и о проекте, который помогает иначе увидеть доступность, самостоятельность и человеческое достоинство.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="AW2bdcKQM80"
+              data-video-title="Право каждого — Права человека"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/AW2bdcKQM80/maxresdefault.jpg"
+                  alt="Обложка выпуска Права человека"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Права человека</h3>
+                <p>Выпуск о ценности прав человека в современном мире: почему эта тема касается повседневной жизни, выбора и личной ответственности.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="K_tdfcas_M4"
+              data-video-title="Право каждого — Биосфера Балтики"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/K_tdfcas_M4/maxresdefault.jpg"
+                  alt="Обложка выпуска Биосфера Балтики"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Биосфера Балтики</h3>
+                <p>Выпуск о реабилитационном центре для диких животных: работе спасения, восстановления и возвращения живой природы в безопасную среду.</p>
+              </div>
+            </button>
+          </article>
+
+          <article class="episode-card">
+            <button
+              class="episode-trigger video-open"
+              type="button"
+              data-video-id="qYnNzJH32uI"
+              data-video-title="Право каждого — Верю в чудо"
+            >
+              <div class="episode-cover">
+                <img
+                  src="https://img.youtube.com/vi/qYnNzJH32uI/maxresdefault.jpg"
+                  alt="Обложка выпуска Верю в чудо"
+                />
+              </div>
+              <div class="episode-copy">
+                <h3>Верю в чудо</h3>
+                <p>История о благотворительном фонде и людях, которые помогают там, где особенно важны поддержка, доверие и системная забота.</p>
+              </div>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact-section full-width-note callout-section">
+      <div class="section-grid">
+        <article class="section-title case-callout">
+          <p class="section-kicker">Что я сделал в проекте</p>
+          <div class="text-flow">
+            <p>
+              “Право каждого” я реализовал практически самостоятельно, пройдя все стадии
+              производства: от идеи и подготовки грантовой заявки до съемок, монтажа,
+              выпуска десяти фильмов и организации показов в кинотеатрах Калининградской
+              области. Проект получил поддержку Росмолодежи, а моей задачей было не только
+              снять сериал, но и выстроить весь процесс его реализации.
+            </p>
+            <p>
+              Я искал героев, договаривался о съемках, проводил интервью, работал с камерой
+              и собирал каждый выпуск на монтаже. В центре каждой серии была социальная
+              инициатива, но мне было важно не ограничиваться рассказом о полезном деле,
+              а показать человека: его мотивацию, внутренний конфликт и причины, по которым
+              он решил менять пространство вокруг себя.
+            </p>
+            <p>
+              Этот проект стал для меня большим опытом самостоятельной работы с документальной
+              историей и научил удерживать одновременно творческую и производственную стороны:
+              видеть общую концепцию сериала, не теряя важных деталей внутри истории каждого героя.
+              Съемочно-монтажное производство заняло около полугода.
+            </p>
+            <div class="production-stats" aria-label="Производственный масштаб проекта">
+              <div class="production-stat">
+                <strong>10 фильмов</strong>
+                <span>документальный веб-сериал</span>
+              </div>
+              <div class="production-stat">
+                <strong>≈30 часов</strong>
+                <span>исходного материала</span>
+              </div>
+              <div class="production-stat">
+                <strong>1 год</strong>
+                <span>реализации проекта</span>
+              </div>
+              <div class="production-stat">
+                <strong>4 дня</strong>
+                <span>показов в кинотеатре</span>
+              </div>
+              <div class="production-stat">
+                <strong>300 тыс.</strong>
+                <span>просмотров в VK Видео</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact-section">
+      <div class="section-grid">
+        <div class="section-title">
+          <p class="section-kicker">Публикации в СМИ</p>
+        </div>
+        <div class="text-flow media-note">
+          <p>
+            У проекта были публичные показы в Калининграде, а премьера и серия фильмов
+            получили внимание региональных медиа.
+          </p>
+        </div>
+        <div class="source-grid">
+          <a class="source-link" href="https://www.tvoybro.com/stream/6374973490713000000_v-kalininghradie-proshla-priemiera-filma-pravo-kazhdogho" target="_blank" rel="noreferrer">Твой Бро: премьера фильма “Право каждого” <span>↗</span></a>
+          <a class="source-link" href="https://www.newkaliningrad.ru/afisha/cinema/news/24023950-v-epitsentre-pokazhut-dokumentalnye-filmy-o-kaliningradskikh-aktivistakh-foto.html" target="_blank" rel="noreferrer">New Kaliningrad: показ фильмов о калининградских активистах <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="case-footer" id="contact">
+      <article class="footer-copy">
+        <h2>Больше обо мне и проектах</h2>
+        <p>
+          В соцсетях делюсь кейсами, наблюдениями о монтаже, авторскими проектами
+          и материалами к будущим образовательным запускам.
+        </p>
+        <a class="footer-about-link" href="mailto:apusko.media@gmail.com">Написать →</a>
+      </article>
+
+      <div class="footer-panel">
+        <div>
+          <p class="footer-kicker">Связь и соцсети</p>
+          <address class="footer-links">
+            <a class="footer-link wide" href="mailto:apusko.media@gmail.com">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+              </span>
+              <span>apusko.media@gmail.com</span>
+            </a>
+            <a class="footer-link" href="https://www.instagram.com/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><path d="M17.5 6.5h.01"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://t.me/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m21 3-7.5 18-4-7-6.5-3 18-8Z"/><path d="m9.5 14 4-4"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://www.youtube.com/@apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 10 5 2-5 2v-4Z"/></svg>
+              </span>
+              <span>@apusko</span>
+            </a>
+            <a class="footer-link" href="https://vk.ru/apusko" target="_blank" rel="noreferrer">
+              <span class="icon" aria-hidden="true">VK</span>
+              <span>@apusko</span>
+            </a>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="footer-strip">
+        <a class="footer-brand" href="index.html" aria-label="На главную">
+          <strong>Александр Пусько</strong>
+          <span>Режиссер монтажа</span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Карта сайта">
+          <a href="index.html#cases">Кейсы</a>
+          <a href="index.html#projects">Проекты и продукты</a>
+          <a href="index.html#profile">Обо мне</a>
+          <a href="index.html#contact">Контакты</a>
+        </nav>
+      </div>
+    </footer>
+  </main>
+
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Просмотр видео" hidden>
+    <button class="video-backdrop" type="button" data-video-close aria-label="Закрыть видео"></button>
+    <div class="video-dialog">
+      <button class="video-close" type="button" data-video-close aria-label="Закрыть видео">×</button>
+      <div id="videoFrame"></div>
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Право каждого",
+      "genre": "Документальный веб-сериал",
+      "description": "Авторский документальный веб-сериал о социальных инициативах Калининграда.",
+      "creator": {
+        "@type": "Person",
+        "name": "Александр Пусько",
+        "alternateName": "APUSKO",
+        "jobTitle": "Режиссер монтажа"
+      }
+    }
+  </script>
+
+  <script>
+    (() => {
+      const modal = document.querySelector("#videoModal");
+      const frameMount = document.querySelector("#videoFrame");
+      const openButtons = document.querySelectorAll(".video-open");
+      const closeButtons = document.querySelectorAll("[data-video-close]");
+      let lastFocused = null;
+
+      const makeEmbedUrl = (videoId) => {
+        const params = new URLSearchParams({
+          autoplay: "1",
+          rel: "0",
+          modestbranding: "1",
+          playsinline: "1"
+        });
+
+        return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+      };
+
+      const closeVideo = () => {
+        modal.hidden = true;
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        frameMount.replaceChildren();
+
+        if (lastFocused) {
+          lastFocused.focus();
+        }
+      };
+
+      const openVideo = (button) => {
+        const videoId = button.dataset.videoId;
+
+        if (!videoId) {
+          return;
+        }
+
+        lastFocused = button;
+        const iframe = document.createElement("iframe");
+        iframe.src = makeEmbedUrl(videoId);
+        iframe.title = button.dataset.videoTitle || "Видео проекта";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allowFullscreen = true;
+
+        frameMount.replaceChildren(iframe);
+        modal.hidden = false;
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        modal.querySelector(".video-close").focus();
+      };
+
+      openButtons.forEach((button) => {
+        button.addEventListener("click", () => openVideo(button));
+      });
+
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", closeVideo);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !modal.hidden) {
+          closeVideo();
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>
